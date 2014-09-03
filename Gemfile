@@ -39,7 +39,11 @@ gem 'spring',        group: :development
 # gem 'debugger', group: [:development, :test]
  
 # Custom gem dependencies
+# Login
 gem 'devise'
 gem 'omniauth'
 gem 'omniauth-twitter'
+
+# Frontend asset management
+gem "bower-rails", "~> 0.8.3"
 
