@@ -1,7 +1,0 @@
-{
-  "name": "dsl-generated dependencies",
-  "dependencies": {
-    "angular": "1.2.13",
-    "angular-ui-bootstrap-bower": "latest"
-  }
-}
