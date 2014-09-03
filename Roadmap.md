@@ -1,10 +1,7 @@
 # Roadmap
 ## Pflicht
 ### 0.1.0 (Tag 1)
-- angular ui.bootstrap einbinden
-- alles mit self signed https (MUSS!)
-- multiuser: sign up mit twitter (omniauth ...) -> models
-- angular ui.bootstrap einbinden
+- grundlegendes layout, login, bootstrap
 
 ### 0.2.0 (Tag 3)
 - mehrere nutzer mit mehreren wallets
