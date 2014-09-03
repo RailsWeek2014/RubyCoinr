@@ -37,4 +37,9 @@ gem 'spring',        group: :development
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+ 
+# Custom gem dependencies
+gem 'devise'
+gem 'omniauth'
+gem 'omniauth-twitter'
 
