@@ -43,3 +43,12 @@ gem 'spring',        group: :development
 gem 'devise'
 gem 'omniauth'
 gem 'omniauth-twitter'
+
+# twitter bootstrap css & javascript toolkit
+gem 'twitter-bootswatch-rails', '~> 3.2.0'
+
+# twitter bootstrap helpers gem, e.g., alerts etc...
+gem 'twitter-bootswatch-rails-helpers'
+
+# LESS for bootswatch
+gem 'therubyracer'
