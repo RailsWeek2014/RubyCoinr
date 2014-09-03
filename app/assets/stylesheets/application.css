@@ -12,4 +12,8 @@
  *
  *
  *= require_self
+ *= require home
+ *= require lumen/loader
+ *= require lumen/bootswatch
+ *= require devise_bootstrap_views
  */
