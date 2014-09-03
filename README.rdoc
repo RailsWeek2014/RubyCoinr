@@ -1,0 +1,11 @@
+== RubyCoinr
+
+This project provides a local multiuser wallet managing webapp.
+
+=== Using
+This project needs at least Ruby version 2.1.2. After downloading and unpacking RubyCoinr, execute the following commands:
+
+	bundle
+	rake bower:install
+
+`bundle` installs all needed gems and `bower` manages the frontend assets like `angular` or `bootstrap`.
