@@ -1,14 +1,75 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>RubyCoinr</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
+    <title>RubyCoinr</title>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
 </head>
 <body>
 
-<%= yield %>
+    <header id="header" class="">
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">RubyCoinr</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <div class="nav navbar-nav navbar-right">
+                    <ul>
+                    <% if user_signed_in? %>
+                        <li><%= link_to 'Edit account', edit_user_registration_path, :class => "btn btn-default btn-sm" %></li>
+                        <li><%= link_to "Sign Out", destroy_user_session_path, :method => :delete, :class => 'btn btn-warning btn-sm' %></li>
+                    <% else %>
+                        <li><%= link_to "Sign In", new_user_session_path, :class => "btn btn-default btn-sm" %></li>
+                        <li><%= link_to "Sign Up", new_user_registration_path, :class => "btn btn-success btn-sm" %></li>
+                    <% end %>
+                    </ul>
+                </div>
+            </div><!--/.nav-collapse -->
+        </div>
+    </div>
+    </header><!-- /header -->
 
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <%= yield %>
+            </div>
+
+            <div class="col-md-4 sidebar">
+                <!-- transactions -->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <p>Transactions</p>
+                    </div>
+                    <div class="panel-body">
+                      <p>You have no transactions.</p>
+                    </div>
+                    <div class="panel-footer"> 
+                        <a href="#" class="btn btn-primary btn-sm disabled">Issue tx</a>
+                    </div>
+                </div>
+                <!-- wallets -->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <p>Wallets</p>
+                    </div>
+                    <div class="panel-body">
+                      <p>You have no wallets configured. Start by adding a new one!</p>
+                    </div>
+                    <div class="panel-footer"> 
+                        <a href="#" class="btn btn-primary btn-sm disabled">Add wallet</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Javascripts
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <%= javascript_include_tag "lumen" %>
+    <%= yield(:page_javascript) if content_for?(:page_javascript) %>
 </body>
 </html>
