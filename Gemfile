@@ -50,5 +50,8 @@ gem 'twitter-bootswatch-rails', '~> 3.2.0'
 # twitter bootstrap helpers gem, e.g., alerts etc...
 gem 'twitter-bootswatch-rails-helpers'
 
+# bootstrap views for devise
+gem 'devise-bootstrap-views'
+
 # LESS for bootswatch
 gem 'therubyracer'
