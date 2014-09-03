@@ -21,3 +21,5 @@
 # .DS_Store (osx)
 .DS_Store
 
+# bower components
+bower_components/**
