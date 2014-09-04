@@ -11,7 +11,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140903142234) do
+ActiveRecord::Schema.define(version: 20140904092747) do
+
+  create_table "addresses", force: true do |t|
+    t.string   "addr"
+    t.integer  "wallet_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "addresses", ["wallet_id"], name: "index_addresses_on_wallet_id"
+
+  create_table "transactions", force: true do |t|
+    t.string   "sender_addr"
+    t.string   "status_msg"
+    t.boolean  "confirmed"
+    t.string   "receiver_addr"
+    t.string   "amount"
+    t.string   "fee"
+    t.integer  "wallet_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "transactions", ["wallet_id"], name: "index_transactions_on_wallet_id"
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -30,5 +53,17 @@ ActiveRecord::Schema.define(version: 20140903142234) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+
+  create_table "wallets", force: true do |t|
+    t.integer  "user_id"
+    t.string   "label"
+    t.string   "password"
+    t.string   "pubkey"
+    t.string   "privkey"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "wallets", ["user_id"], name: "index_wallets_on_user_id"
 
 end
