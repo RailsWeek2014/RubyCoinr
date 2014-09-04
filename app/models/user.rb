@@ -5,5 +5,4 @@ class User < ActiveRecord::Base
   :recoverable, :rememberable, :trackable, :validatable
 
   has_many :wallets
-  has_many :addresses, through: :wallets
 end

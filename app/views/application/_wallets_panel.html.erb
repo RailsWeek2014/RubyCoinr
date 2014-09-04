@@ -4,9 +4,9 @@
     </div>
     <div class="panel-body">
         <% if user_signed_in? && current_user.wallets.any? %>
-        <ul>
             <% current_user.wallets.each do |w| %>
-            <li><%= w.label %></li>
+                <h4><%= w.label %></h4>
+                <p><%= w.address %></p>
             <% end %>
         </ul>
         <% else %>

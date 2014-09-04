@@ -11,16 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140904092747) do
-
-  create_table "addresses", force: true do |t|
-    t.string   "addr"
-    t.integer  "wallet_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "addresses", ["wallet_id"], name: "index_addresses_on_wallet_id"
+ActiveRecord::Schema.define(version: 20140904091613) do
 
   create_table "transactions", force: true do |t|
     t.string   "sender_addr"
@@ -56,6 +47,7 @@ ActiveRecord::Schema.define(version: 20140904092747) do
 
   create_table "wallets", force: true do |t|
     t.integer  "user_id"
+    t.string   "address"
     t.string   "label"
     t.string   "password"
     t.string   "pubkey"
