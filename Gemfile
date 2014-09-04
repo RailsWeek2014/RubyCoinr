@@ -55,3 +55,9 @@ gem 'devise-bootstrap-views'
 
 # LESS for bootswatch
 gem 'therubyracer'
+
+# Better errors
+gem 'better_errors'
+gem 'binding_of_caller'
+
+gem 'bitcoin-ruby', git: 'https://github.com/lian/bitcoin-ruby', branch: 'master', require: 'bitcoin'
