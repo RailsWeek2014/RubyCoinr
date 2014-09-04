@@ -37,34 +37,8 @@
             <div class="col-md-8">
                 <%= yield %>
             </div>
-
-            <div class="col-md-4 sidebar">
-                <!-- transactions -->
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <p>Transactions</p>
-                    </div>
-                    <div class="panel-body">
-                      <p>You have no transactions.</p>
-                    </div>
-                    <div class="panel-footer"> 
-                        <a href="#" class="btn btn-primary btn-sm disabled">Issue tx</a>
-                    </div>
-                </div>
-                <!-- wallets -->
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <p>Wallets</p>
-                    </div>
-                    <div class="panel-body">
-                      <p>You have no wallets configured. Start by adding a new one!</p>
-                    </div>
-                    <div class="panel-footer"> 
-                        <a href="#" class="btn btn-primary btn-sm disabled">Add wallet</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+            
+            <%= render 'sidebar' %>
     </div>
     <!-- Javascripts
     ================================================== -->

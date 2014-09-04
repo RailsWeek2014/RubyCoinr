@@ -1,0 +1,31 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <p>Transactions</p>
+    </div>
+    <div class="panel-body">
+        <% if user_signed_in? && current_user.wallets.any? %>
+            <% current_user.wallets.each do |w| %>
+                <% if w.transactions.any? %>
+                    <% w.transactions.each do |tx| %>
+                    <li>
+                        <% if tx.confirmed %>
+                        <span class="glyphicon glyphicon-ok success"></span>
+                        <% else %>
+                        <span class="glyphicon glyphicon-remove warning"></span>
+                        <% end %>
+
+                        Tx to <%= tx.receiver_addr %> <span><%= tx.amount %></span>
+                    </li>
+                    <% end %>
+                <% else %>
+                    <p>You have no transactions.</p>
+                <% end %>
+            <% end %>
+        <% else %>
+            <p>You have no wallets configured. Start by adding one.</p>
+        <% end %>
+    </div>
+    <div class="panel-footer"> 
+        <%= link_to "Issue tx", new_transaction_path, :class => user_signed_in? ? "btn btn-primary btn-sm" : "btn btn-primary btn-sm disabled" %>
+    </div>
+</div>
