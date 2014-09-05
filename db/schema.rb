@@ -11,7 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140904091613) do
+ActiveRecord::Schema.define(version: 20140904143552) do
+
+  create_table "keypairs", force: true do |t|
+    t.string   "privkey"
+    t.string   "pubkey"
+    t.string   "address"
+    t.boolean  "used"
+    t.integer  "wallet_id"
+    t.string   "addr_qrcode_svg"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "keypairs", ["wallet_id"], name: "index_keypairs_on_wallet_id"
 
   create_table "transactions", force: true do |t|
     t.string   "sender_addr"
@@ -47,11 +60,8 @@ ActiveRecord::Schema.define(version: 20140904091613) do
 
   create_table "wallets", force: true do |t|
     t.integer  "user_id"
-    t.string   "address"
     t.string   "label"
-    t.string   "password"
-    t.string   "pubkey"
-    t.string   "privkey"
+    t.integer  "keypair_ptr_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
