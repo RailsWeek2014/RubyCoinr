@@ -50,8 +50,19 @@ gem 'twitter-bootswatch-rails', '~> 3.2.0'
 # twitter bootstrap helpers gem, e.g., alerts etc...
 gem 'twitter-bootswatch-rails-helpers'
 
-# bootstrap views for devise
+# bootstrap views for devise and forms
 gem 'devise-bootstrap-views'
+gem 'bootstrap_form'
 
 # LESS for bootswatch
 gem 'therubyracer'
+
+# Better errors
+gem 'better_errors'
+gem 'binding_of_caller'
+
+# bitcoin
+gem 'bitcoin-ruby', git: 'https://github.com/lian/bitcoin-ruby', branch: 'master', require: 'bitcoin'
+
+# QR codes
+gem 'rqrcode_to_svg'

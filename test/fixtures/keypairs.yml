@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  privkey: MyString
+  pubkey: MyString
+  wallet_id: 
+
+two:
+  privkey: MyString
+  pubkey: MyString
+  wallet_id: 

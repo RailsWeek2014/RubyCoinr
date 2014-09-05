@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  receiver_addr: MyString
+  amount: MyString
+  fee: MyString
+
+two:
+  receiver_addr: MyString
+  amount: MyString
+  fee: MyString
