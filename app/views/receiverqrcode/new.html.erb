@@ -1,0 +1,55 @@
+<h2>Receive Payment</h2>
+
+<% if user_signed_in? %> <!-- is logged in? -->
+<% if current_user.wallets.any? %><!-- can receive payments? -->
+
+<% if @receiverqrcode.errors.any? %>
+<!-- errors -->
+<div class="alert alert-danger">
+	<strong>Oh snap!</strong> <%= pluralize(@receiverqrcode.errors.count, "error") %> with your paymenent information:
+	<ul>
+		<% @receiverqrcode.errors.full_messages.each do |message| %>
+		<li><%= message %></li>
+		<% end %><!-- end iterator over error messages -->
+	</ul>
+</div>
+
+<!-- form -->
+<%= render :partial =>'shared/receiverqrcode_form' %>
+<!-- end form -->
+
+<% else %><!-- no errors -->
+
+<!-- qrcode -->
+<% if @receiverqrcode_svg %>
+<!-- data valid and qrcode generated -->
+
+<p class="alert alert-info">Let the payee scan the following qr code and wait for the transaction to be confirmed.</p>
+
+<div class="well centered">
+	<!-- qrcode -->
+	<%= render :inline => @receiverqrcode_svg %>
+
+	<!-- url -->
+	<p><%= @btc_url %></p>
+</div>
+
+<% end %><!-- if @receiverqrcode_svg fin -->
+<!-- fin qrcode -->
+
+<h3>Edit payment information</h3>
+
+<!-- form -->
+<%= render :partial =>'shared/receiverqrcode_form' %>
+<!-- end form -->
+
+<!-- errors fin -->
+<% end %><!-- end if errors.any? -->
+
+<% else %><!-- can’t receive payments -->
+<p>You have no wallets configured. Start by adding one.</p>
+<% end %><!-- current_user.wallets.any? fin -->
+
+<% else %><!-- is not logged in -->
+<p>Please sign in</p>
+<% end %><!-- end is logged in? -->

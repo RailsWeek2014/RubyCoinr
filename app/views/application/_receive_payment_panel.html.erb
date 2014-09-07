@@ -1,0 +1,20 @@
+<!-- receive payments panel -->
+<div class="panel panel-default">
+
+    <div class="panel-heading">
+        <p><a data-toggle="collapse" data-target="#receiveqrcode_form" href="#receiveqrcode_form"><span class="caret"></span> Receive Bitcoins</a></p>
+    </div><!-- panel heading fin -->
+
+    <div class="panel-body collapse" id="receiveqrcode_form">
+        <% if user_signed_in? && current_user.wallets.any? %>
+
+        <!-- form -->
+        <%= render :partial =>'shared/receiverqrcode_form' %>
+        <!-- end form -->
+
+        <% else %>
+        <p>You have no wallets configured. Start by adding one.</p>
+        <% end %>
+    </div><!-- panel body fin -->
+
+</div><!-- receive payments panel fin -->

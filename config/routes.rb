@@ -3,6 +3,15 @@ Rails.application.routes.draw do
 
   resources :wallets
 
+  # post 'new_receiving_qrcode' => 'wallets#new_receiving_qrcode', as: 'gen_receiving_qrcode'
+  get 'receiverqrcode/new' => 'receiverqrcode#new'
+  post 'receiverqrcode' => 'receiverqrcode#create'
+
+  # redirect other requests to home
+  get 'receiverqrcode' => 'home#index'
+  patch 'receiverqrcode' => 'home#index'
+  delete 'receiverqrcode' => 'home#index'
+
   devise_for :users
   root :to => "home#index"
 
