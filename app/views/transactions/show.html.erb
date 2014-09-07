@@ -1,18 +1,51 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Receiver addr:</strong>
-  <%= @transaction.receiver_addr %>
+<% if notice %>
+<p id="notice" class="alert alert-success">
+	<%= notice %>
 </p>
+<% end %>
 
-<p>
-  <strong>Amount:</strong>
-  <%= @transaction.amount %>
-</p>
 
-<p>
-  <strong>Fee:</strong>
-  <%= @transaction.fee %>
-</p>
+<% if @transaction.confirmed %>
+<div class="alert alert-succsess">
+	This transaction is confirmed by the bitcoin network.
+</div>
+<% else %>
+<div class="alert alert-info">
+	This transaction is not confirmed yet.
+</div>
+<% end %>
+
+<div class="well">
+	<div class="row">
+		<div class="col-lg-3">
+			<strong>Receiver address:</strong>
+		</div>
+
+		<div class="col-lg-9">
+			<%= @transaction.receiver_addr %>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-lg-3">
+			<strong>Amount:</strong>
+		</div>
+
+		<div class="col-lg-9">
+			<%= @transaction.amount %>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-lg-3">
+			<strong>Fee:</strong>
+		</div>
+
+		<div class="col-lg-9">
+			<%= @transaction.fee %>
+		</div>
+	</p>
+</div>
+</div>
 
 <%= link_to raw('<span class="glyphicon glyphicon-chevron-left"></span> Back'), transactions_path, :class => 'btn btn-default' %>
