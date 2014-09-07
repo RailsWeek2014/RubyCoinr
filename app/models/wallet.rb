@@ -7,6 +7,8 @@ class Wallet < ActiveRecord::Base
 	# create initial keypair
 	after_create :generate_keypair
 
+	validates :label, presence: true
+
 	# add new keypair (private key and public key) with
 	# address and update the pointer to it. the pointer
 	# always points to the newest (unused) keypair
