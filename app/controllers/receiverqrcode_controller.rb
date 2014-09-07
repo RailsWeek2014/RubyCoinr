@@ -39,4 +39,8 @@ class ReceiverqrcodeController < ApplicationController
 		render action: 'new'
 	end
 
+	private
+	def receiverqrcode_params
+		params.require(:receiverqrcode).permit(:receiver_addr, :label, :amount, :message)
+	end
 end

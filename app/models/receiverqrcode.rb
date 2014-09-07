@@ -29,9 +29,4 @@ class Receiverqrcode
         # todo
         RQRCode::QRCode.new("", :size => 4, :level => 'h').to_svg
     end
-
-    private
-    def receiverqrcode_params
-        receiverqrcode.require(:receiverqrcode).permit(:receiver_addr, :label, :amount, :message)
-    end
 end
