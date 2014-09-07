@@ -13,7 +13,7 @@ class Wallet < ActiveRecord::Base
 	def generate_keypair
 		key = Bitcoin::generate_key
 		addr = Bitcoin::pubkey_to_address(key[1])
-		svg = RQRCode::QRCode.new(addr, :size => 4, :level => 'h').to_svg
+		svg = RQRCode::QRCode.new('bitcoin:' + addr, :size => 10, :level => 'h').to_svg
 
 		keypair = Keypair.new(
 			privkey: key[0],
