@@ -14,6 +14,9 @@
 		<li>
 			<strong>Addresse:</strong> <span class="btc-addr"><%= @wallet.curr_key.address %></span>
 		</li>
+		<li class="qrcode">
+		<%= render inline: @wallet.curr_key.addr_qrcode_svg %>
+		</li>
 	</ul>
 </div>
 
