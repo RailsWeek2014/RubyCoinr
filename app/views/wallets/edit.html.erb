@@ -1,6 +1,6 @@
-<h1>Editing wallet</h1>
+<% content_for :page_title, 'Create new wallet' %>
+<h2>Editing wallet</h2>
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @wallet %> |
-<%= link_to 'Back', wallets_path %>
+<%= render partial: 'back_button' %>

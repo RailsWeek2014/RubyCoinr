@@ -1,0 +1,1 @@
+<%= link_to raw('<span class="glyphicon glyphicon-plus-sign"></span> Issue tx'), new_transaction_path, :class => (user_signed_in? && current_user.wallets.any?) ? "btn btn-primary btn-sm" : "btn btn-primary btn-sm disabled" %>
