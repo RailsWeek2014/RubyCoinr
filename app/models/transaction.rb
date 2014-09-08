@@ -5,6 +5,7 @@ class Transaction < ActiveRecord::Base
 	
 	belongs_to :wallet
 
+	validates :sender_addr, presence: true
 	validates :receiver_addr, presence: true
 	validates :amount, presence: true, numericality: true
 	validates :fee, presence: true, numericality: true
