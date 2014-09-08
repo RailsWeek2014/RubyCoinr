@@ -1,9 +1,10 @@
+<% content_for :page_title, 'Transaction' %><!-- FIXME: label -->
+
 <% if notice %>
 <p id="notice" class="alert alert-success">
 	<%= notice %>
 </p>
 <% end %>
-
 
 <% if @transaction.confirmed %>
 <div class="alert alert-succsess">

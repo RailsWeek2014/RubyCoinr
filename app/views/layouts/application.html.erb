@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>RubyCoinr</title>
+    <!-- see http://de.slideshare.net/JamesEdwardGrayII/drying-up-rails-views-and-controllers -->
+    <title><%= ['RubyCoinr', yield(:page_title)].compact.join(' - ') %></title>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
