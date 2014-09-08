@@ -1,4 +1,6 @@
 class TransactionsController < ApplicationController
+  include TransactionsHelper
+
   before_action :set_transaction, only: [:show, :edit, :update, :destroy]
 
   # GET /transactions
@@ -24,7 +26,9 @@ class TransactionsController < ApplicationController
   # POST /transactions
   # POST /transactions.json
   def create
-    @transaction = Transaction.new(transaction_params)
+    # not sent by form
+    sender_addr = { :sender_addr => wallet_addr_for_id(transaction_params[:wallet_id]) }
+    @transaction = Transaction.new(transaction_params.merge(sender_addr))
 
     respond_to do |format|
       if @transaction.save
@@ -69,6 +73,6 @@ class TransactionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def transaction_params
-      params.require(:transaction).permit(:wallet_id, :sender_addr, :receiver_addr, :amount, :fee)
+      params.require(:transaction).permit(:wallet_id, :receiver_addr, :amount, :fee)
     end
 end

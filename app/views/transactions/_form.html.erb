@@ -1,29 +1,36 @@
-<%= form_for(@transaction) do |f| %>
-  <% if @transaction.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@transaction.errors.count, "error") %> prohibited this transaction from being saved:</h2>
+<!-- errors -->
+<% if @transaction.errors.any? %>
+<div class="alert alert-danger">
+  <h2>
+    Oh snap! <%= pluralize(@transaction.errors.count, "error") %> prohibited this transaction from being saved:
+  </h2>
 
-      <ul>
-      <% @transaction.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :receiver_addr %><br>
-    <%= f.text_field :receiver_addr %>
-  </div>
-  <div class="field">
-    <%= f.label :amount %><br>
-    <%= f.text_field :amount %>
-  </div>
-  <div class="field">
-    <%= f.label :fee %><br>
-    <%= f.text_field :fee %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <ul>
+    <% @transaction.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
 <% end %>
+<!-- errors fin -->
+
+<!-- form -->
+<div class="well">
+  <%= bootstrap_form_for(@transaction) do |f| %>
+  <!-- sender address -->
+  <%= f.select :wallet_id, options_for_wallet_select, {} %>
+
+  <!-- field set -->
+  <%= f.text_field :receiver_addr %>
+
+  <!-- amount -->
+  <%= f.text_field :amount %>
+
+  <!-- fee -->
+  <%= f.text_field :fee %>
+
+  <%= f.submit %>
+
+  <% end %>
+</div>
+<!-- form fin -->
