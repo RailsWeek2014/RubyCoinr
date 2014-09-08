@@ -24,8 +24,12 @@ class WalletsController < ApplicationController
   # POST /wallets
   # POST /wallets.json
   def create
-    @wallet = Wallet.new(wallet_params)
-    @wallet.user = current_user
+    begin
+      @wallet = Wallet.new(wallet_params)
+      @wallet.user = current_user
+    rescue Exception
+      @wallet.errors << 'Label too long'
+    end
 
     respond_to do |format|
       if @wallet.save

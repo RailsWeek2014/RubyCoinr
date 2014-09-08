@@ -26,7 +26,6 @@ header  {
 	}
 }
 
-
 .centered {
 	text-align: center;
 }
@@ -56,4 +55,9 @@ header  {
 	li + li {
 		margin-left: 2em;
 	}
+}
+
+li.qrcode {
+	list-style-type: none;
+	margin: 2em;
 }
