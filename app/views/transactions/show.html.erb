@@ -1,4 +1,8 @@
-<% content_for :page_title, 'Transaction' %><!-- FIXME: label -->
+<% if @transaction.label %>
+<% content_for :page_title, 'Transaction ' + @transaction.label %>
+<% else %>
+<% content_for :page_title, 'Transacton to ' + @transaction.receiver_addr %>
+<% end %>
 
 <% if notice %>
 <p id="notice" class="alert alert-success">
@@ -16,6 +20,10 @@
 </div>
 <% end %>
 
+<% if @transaction.label && @transaction.label.length > 0 %>
+<h3><%= @transaction.label %></h3>
+<% end %>
+
 <div class="well">
 	<div class="row">
 		<div class="col-lg-3">
@@ -23,7 +31,7 @@
 		</div>
 
 		<div class="col-lg-9">
-			<%= @transaction.receiver_addr %>
+			<span class="btc-addr"><%= @transaction.receiver_addr %></span>
 		</div>
 	</div>
 

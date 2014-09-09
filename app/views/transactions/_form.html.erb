@@ -17,10 +17,13 @@
 <!-- form -->
 <div class="well">
   <%= bootstrap_form_for(@transaction) do |f| %>
+  <!-- label -->
+  <%= f.text_field :label %>
+
   <!-- sender address -->
   <%= f.select :wallet_id, options_for_wallet_select, {} %>
 
-  <!-- field set -->
+  <!-- receiver address -->
   <%= f.text_field :receiver_addr %>
 
   <!-- amount -->

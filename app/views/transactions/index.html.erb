@@ -18,7 +18,14 @@
   <tbody>
     <% w[1].each do |tx| %>
       <tr>
-        <td><%= tx.receiver_addr %></td>
+        <td>
+        <% if tx.label && tx.label.length > 0 %>
+        <%= tx.label %>
+        <%= render inline: '<br>' %>
+        <% end %>
+
+        <span class="btc-addr"><%= tx.receiver_addr %></span>
+        </td>
         <% if tx.confirmed %>
         <td><span class="label label-success">Confirmed</span></td>
         <% else %>
