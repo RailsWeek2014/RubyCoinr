@@ -39,25 +39,3 @@ header  {
 	display: inline-block;
 	border: 1px solid #efefef;
 }
-
-.tx-cnt {
-	margin-left: 0;
-	padding-left: 0;
-	text-align: center;
-
-	li {
-		list-style-type: none;
-		display: inline-block;
-		padding: 0.5em 0em;
-		margin: 0;
-		text-indent: 0;
-	}
-	li + li {
-		margin-left: 2em;
-	}
-}
-
-li.qrcode {
-	list-style-type: none;
-	margin: 2em;
-}

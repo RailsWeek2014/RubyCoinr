@@ -6,16 +6,15 @@
         <% if user_signed_in? %>
         <% if current_user.wallets.any? %>
         <h3>Incoming</h3>
-        <ul class="tx-cnt">
-            <li>Confirmed <span class="badge"><%= confirmed_incoming_txs_count %></span></li>
-            <li>Unconfirmed <span class="badge"><%= unconfirmed_incoming_txs_count %></span></li>
+        <ul class="list-group">
+            <li class="list-group-item">Confirmed <span class="badge"><%= confirmed_incoming_txs_count %></span></li>
+            <li class="list-group-item">Unconfirmed <span class="badge"><%= unconfirmed_incoming_txs_count %></span></li>
         </ul>
 
-        <hr>
         <h3>Outgoing</h3>
-        <ul class="tx-cnt">
-            <li>Confirmed <span class="badge"><%= confirmed_outgoing_txs_count %></span></li>
-            <li>Unconfirmed <span class="badge"><%= unconfirmed_outgoing_txs_count %></span></li>
+        <ul class="list-group">
+            <li class="list-group-item">Confirmed <span class="badge"><%= confirmed_outgoing_txs_count %></span></li>
+            <li class="list-group-item">Unconfirmed <span class="badge"><%= unconfirmed_outgoing_txs_count %></span></li>
         </ul>
     </ul>
     <% else %><!-- if any wallets -->
