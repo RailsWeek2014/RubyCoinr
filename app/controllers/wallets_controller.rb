@@ -66,6 +66,13 @@ class WalletsController < ApplicationController
     end
   end
 
+  # export wallet as json
+  def export
+    set_wallet
+    send_data(Btc.wallet_to_json(@wallet), type: 'text/json; charset=utf-8; header=present',
+      disposition: 'attachment; filename=wallet.json')
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_wallet

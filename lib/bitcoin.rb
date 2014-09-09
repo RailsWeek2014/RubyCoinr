@@ -1,4 +1,5 @@
 require 'bitcoin'
+require 'json'
 
 class Btc
 
@@ -44,4 +45,37 @@ class Btc
 		end
 	end
 
+	# export/import of wallet
+	# format: https://blockchain.info/wallet/wallet-format
+
+	# convert wallet to 
+	def self.wallet_to_json wallet
+		json = Hash.new
+
+		# set wallet label if exists
+		if wallet.label && wallet.label.length > 0
+			json['label'] = wallet.label
+		end
+
+		# convert keys
+		if wallet.keypairs.any?
+			json['keys'] = []
+
+			wallet.keypairs.each do |keypair|
+				key = Hash.new
+
+				# 
+				if keypair.used
+					key['tag']  = 2
+				end
+
+				key['addr'] = keypair.address
+				key['priv'] = convert_priv_key_to_wif keypair.privkey
+
+				json['keys'] << key
+			end
+		end
+
+		JSON.pretty_generate(json)
+	end
 end

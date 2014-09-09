@@ -18,6 +18,9 @@
 		<%= render inline: @wallet.curr_key.addr_qrcode_svg %>
 		</li>
 	</ul>
+	<div class="centered row">
+		<%= link_to raw('<span class="glyphicon glyphicon-download-alt"></span> Export Wallet'), wallet_export_path(@wallet), :class => 'btn btn-warning btn-large' %>
+	</div>
 </div>
 
 <%= render partial: 'back_button' %>
