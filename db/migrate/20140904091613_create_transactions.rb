@@ -7,6 +7,7 @@ class CreateTransactions < ActiveRecord::Migration
       t.string :receiver_addr
       t.string :amount
       t.string :fee
+      t.string :label
 
       t.references :wallet, index: true
 

@@ -1,0 +1,26 @@
+<!-- receive payments panel -->
+<div class="panel panel-default">
+
+    <div class="panel-heading">
+        <p><a data-toggle="collapse" data-target="#receiveqrcode_form" href="#receiveqrcode_form"><span class="caret"></span> Receive Bitcoins</a></p>
+    </div><!-- panel heading fin -->
+
+    <div class="panel-body collapse" id="receiveqrcode_form">
+        <% if user_signed_in? %>
+        <% if current_user.wallets.any? %>
+        <!-- form -->
+        <%= render partial: 'shared/receiverqrcode_form' %>
+        <!-- end form -->
+
+        <% else %>
+        <!-- no wallets configured -->
+        <%= render partial: 'shared/no_wallets_configured_warning' %>
+        <% end %><!-- current_user has wallets fin -->
+
+        <% else %>
+        <!-- not logged in -->
+        <%= render partial: 'shared/not_logged_in_warning' %>
+        <% end %><!-- signed in fin -->
+    </div><!-- panel body fin -->
+
+</div><!-- receive payments panel fin -->

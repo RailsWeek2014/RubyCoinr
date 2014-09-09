@@ -3,21 +3,28 @@
         <p>Wallets</p>
     </div>
     <div class="panel-body">
-        <% if user_signed_in? && current_user.wallets.any? %>
+        <% if user_signed_in? %>
+
+        <% if current_user.wallets.any? %>
+
+        <ul>
             <% current_user.wallets.each do |w| %>
-                <h4><%= w.label %></h4>
-                <p><a data-toggle="collapse" data-target="#addr_qr" href="#addr_qr"><span class="caret"></span> <%= w.curr_key.address %></a></p>
-                <div id="addr_qr" class="collapse well well-sm">
-                    <%= render :inline => w.curr_key.addr_qrcode_svg %>
-                </div>
+            <li><%= link_to w.label, w %></li>
             <% end %>
         </ul>
+
         <% else %>
-        <p>You have no wallets configured. Start by adding a new one!</p>
-        <% end %>
+        <!-- no wallets configured -->
+        <%= render partial: 'shared/no_wallets_configured_warning' %>
+        <% end %><!-- current_user has wallets fin -->
+
+        <% else %>
+        <!-- not logged in -->
+        <%= render partial: 'shared/not_logged_in_warning' %>
+        <% end %><!-- signed in fin -->
     </div>
     <div class="panel-footer"> 
-        <%= link_to "Add wallet", new_wallet_path, :class => user_signed_in? ? "btn btn-primary btn-sm" : "btn btn-primary btn-sm disabled" %>
-        <!--<a href="#" class="btn btn-primary btn-sm <% unless user_signed_in? %> disabled <% end %>">Add wallet</a> -->
+        <%= render partial: 'shared/new_wallet_button' %>
+        <%= link_to 'View all', wallets_path, :class => 'btn btn-default pull-right' %>
     </div>
 </div>

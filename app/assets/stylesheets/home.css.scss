@@ -5,12 +5,59 @@ body {
 	margin-top: 100px !important;
 }
 
-header .nav {
-	margin-top: 4px;
-	margin-bottom: -4px;
+header  {
+	.navbar-brand {
+		margin-top: 0;
+		padding-top: 0.2em;
+
+		img.logo {
+			height: 40px;
+		}
+	}
+
+	.nav {
+		margin-top: 4px;
+		margin-bottom: -4px;
+
+		li {
+			display: inline-block;
+			list-style-type: none;
+		}
+	}
+}
+
+.centered {
+	text-align: center;
+}
+
+.btc-addr {
+	font-family: 'Courier';
+	font-size: 0.8em;
+	padding: 0.4em;
+	border-radius: 3px;
+	background: #fefefe;
+	display: inline-block;
+	border: 1px solid #efefef;
+}
+
+.tx-cnt {
+	margin-left: 0;
+	padding-left: 0;
+	text-align: center;
 
 	li {
-		display: inline-block;
 		list-style-type: none;
+		display: inline-block;
+		padding: 0.5em 0em;
+		margin: 0;
+		text-indent: 0;
 	}
+	li + li {
+		margin-left: 2em;
+	}
+}
+
+li.qrcode {
+	list-style-type: none;
+	margin: 2em;
 }

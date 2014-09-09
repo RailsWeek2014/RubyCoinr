@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>RubyCoinr</title>
+    <!-- see http://de.slideshare.net/JamesEdwardGrayII/drying-up-rails-views-and-controllers -->
+    <title><%= ['RubyCoinr', yield(:page_title)].compact.join(' - ') %></title>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
@@ -13,8 +14,9 @@
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
-                <a class="navbar-brand" href="/">RubyCoinr</a>
+                <a class="navbar-brand" href="/" title="RubyCoinr"><%= image_tag 'logo.svg', :class => 'logo' %></a>
             </div>
+
             <div class="navbar-collapse collapse">
                 <div class="nav navbar-nav navbar-right">
                     <ul>

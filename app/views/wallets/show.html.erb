@@ -1,9 +1,24 @@
-<p id="notice"><%= notice %></p>
+<% content_for :page_title, 'Wallet: ' + @wallet.label %>
 
-<p>
-  <strong>Label:</strong>
-  <%= @wallet.label %>
+<% if notice %>
+<p id="notice" class="alert alert-success">
+	<%= notice %>
 </p>
+<% end %>
 
-<%= link_to 'Edit', edit_wallet_path(@wallet) %> |
-<%= link_to 'Back', wallets_path %>
+<div class="well">
+	<ul>
+		<li>
+			<strong>Label:</strong> <%= @wallet.label %>
+		</li>
+		<li>
+			<strong>Addresse:</strong> <span class="btc-addr"><%= @wallet.curr_key.address %></span>
+		</li>
+		<li class="qrcode">
+		<%= render inline: @wallet.curr_key.addr_qrcode_svg %>
+		</li>
+	</ul>
+</div>
+
+<%= render partial: 'back_button' %>
+<%= link_to 'Edit', edit_wallet_path(@wallet), :class => 'btn btn-default' %>

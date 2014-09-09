@@ -3,29 +3,33 @@
         <p>Transactions</p>
     </div>
     <div class="panel-body">
-        <% if user_signed_in? && current_user.wallets.any? %>
-            <% current_user.wallets.each do |w| %>
-                <% if w.transactions.any? %>
-                    <% w.transactions.each do |tx| %>
-                    <li>
-                        <% if tx.confirmed %>
-                        <span class="glyphicon glyphicon-ok success"></span>
-                        <% else %>
-                        <span class="glyphicon glyphicon-remove warning"></span>
-                        <% end %>
+        <% if user_signed_in? %>
+        <% if current_user.wallets.any? %>
+        <h3>Incoming</h3>
+        <ul class="tx-cnt">
+            <li>Confirmed <span class="badge"><%= confirmed_incoming_txs_count %></span></li>
+            <li>Unconfirmed <span class="badge"><%= unconfirmed_incoming_txs_count %></span></li>
+        </ul>
 
-                        Tx to <%= tx.receiver_addr %> <span><%= tx.amount %></span>
-                    </li>
-                    <% end %>
-                <% else %>
-                    <p>You have no transactions.</p>
-                <% end %>
-            <% end %>
-        <% else %>
-            <p>You have no wallets configured. Start by adding one.</p>
-        <% end %>
-    </div>
-    <div class="panel-footer"> 
-        <%= link_to "Issue tx", new_transaction_path, :class => user_signed_in? ? "btn btn-primary btn-sm" : "btn btn-primary btn-sm disabled" %>
-    </div>
+        <hr>
+        <h3>Outgoing</h3>
+        <ul class="tx-cnt">
+            <li>Confirmed <span class="badge"><%= confirmed_outgoing_txs_count %></span></li>
+            <li>Unconfirmed <span class="badge"><%= unconfirmed_outgoing_txs_count %></span></li>
+        </ul>
+    </ul>
+    <% else %><!-- if any wallets -->
+    <!-- no wallets configured -->
+    <%= render partial: 'shared/no_wallets_configured_warning' %>
+    <% end %><!-- current_user has wallets fin -->
+
+    <% else %>
+    <!-- not logged in -->
+    <%= render partial: 'shared/not_logged_in_warning' %>
+    <% end %><!-- signed in fin -->
+</div>
+<div class="panel-footer"> 
+    <%= render partial: 'shared/new_tx_button' %>
+    <%= link_to 'View all', transactions_path, :class => 'btn btn-default pull-right' %>
+</div>
 </div>

@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 20140904143552) do
     t.string   "receiver_addr"
     t.string   "amount"
     t.string   "fee"
+    t.string   "label"
     t.integer  "wallet_id"
     t.datetime "created_at"
     t.datetime "updated_at"

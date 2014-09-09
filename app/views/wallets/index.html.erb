@@ -1,27 +1,31 @@
-<h1>Listing wallets</h1>
+<% content_for :page_title, 'Your Wallets' %>
+<h2>Your wallets</h2>
 
-<table>
+<table class="table table-striped table-hover">
   <thead>
     <tr>
       <th>Label</th>
-      <th>Password</th>
-      <th colspan="3"></th>
+      <th></th>
     </tr>
   </thead>
 
   <tbody>
     <% @wallets.each do |wallet| %>
-      <tr>
-        <td><%= wallet.label %></td>
-        <td><%= wallet.password %></td>
-        <td><%= link_to 'Show', wallet %></td>
-        <td><%= link_to 'Edit', edit_wallet_path(wallet) %></td>
-        <td><%= link_to 'Destroy', wallet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+    <tr>
+      <td>
+        <%= wallet.label %><br>
+        <small><span class="btc-addr"><%= wallet.curr_key.address %></span></small>
+      </td>
+      <td>
+        <%= link_to 'Show', wallet, :class => 'btn btn-default' %>
+        <%= link_to 'Edit', edit_wallet_path(wallet), :class => 'btn btn-default' %>
+        <%= link_to 'Delete', wallet, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-warning' %>
+      </td>
+    </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
 
-<%= link_to 'New Wallet', new_wallet_path %>
+<%= render partial: 'shared/new_wallet_button' %>
