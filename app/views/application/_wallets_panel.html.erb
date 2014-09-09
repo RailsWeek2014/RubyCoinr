@@ -4,28 +4,27 @@
     </div>
     <div class="panel-body">
         <% if user_signed_in? %>
+
         <% if current_user.wallets.any? %>
-        <% current_user.wallets.each do |w| %>
-        <h4><%= w.label %></h4>
-        <p><a data-toggle="collapse" data-target="#addr_qr" href="#addr_qr"><span class="caret"></span> <%= w.curr_key.address %></a></p>
-        <div id="addr_qr" class="collapse well well-sm centered">
-            <%= render :inline => w.curr_key.addr_qrcode_svg %>
-        </div>
-        <% end %>
-    </ul>
 
-    <% else %>
-    <!-- no wallets configured -->
-    <%= render partial: 'shared/no_wallets_configured_warning' %>
-    <% end %><!-- current_user has wallets fin -->
+        <ul>
+            <% current_user.wallets.each do |w| %>
+            <li><%= link_to w.label, w %></li>
+            <% end %>
+        </ul>
 
-    <% else %>
-    <!-- not logged in -->
-    <%= render partial: 'shared/not_logged_in_warning' %>
-    <% end %><!-- signed in fin -->
-</div>
-<div class="panel-footer"> 
-    <%= render partial: 'shared/new_wallet_button' %>
-    <%= link_to 'View all', wallets_path, :class => 'btn btn-default pull-right' %>
-</div>
+        <% else %>
+        <!-- no wallets configured -->
+        <%= render partial: 'shared/no_wallets_configured_warning' %>
+        <% end %><!-- current_user has wallets fin -->
+
+        <% else %>
+        <!-- not logged in -->
+        <%= render partial: 'shared/not_logged_in_warning' %>
+        <% end %><!-- signed in fin -->
+    </div>
+    <div class="panel-footer"> 
+        <%= render partial: 'shared/new_wallet_button' %>
+        <%= link_to 'View all', wallets_path, :class => 'btn btn-default pull-right' %>
+    </div>
 </div>
