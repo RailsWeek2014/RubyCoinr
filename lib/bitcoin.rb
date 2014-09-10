@@ -80,4 +80,5 @@ class Btc
 
 		JSON.pretty_generate(json)
 	end
+
 end
