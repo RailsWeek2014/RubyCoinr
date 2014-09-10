@@ -15,10 +15,18 @@ class Transaction < ActiveRecord::Base
 	# validates receiver_addr
 	validates_with BitcoinAddressValidator
 
+	# set defaults
+	after_create :defaults
+
 	# validate fee
 	def fee_should_be_less_than_amount
 		if fee >= amount
 			errors.add(:fee, "has to be less than amount")
 		end
+	end
+
+	# set defaults
+	def defaults
+		self.confirmed ||= false
 	end
 end
