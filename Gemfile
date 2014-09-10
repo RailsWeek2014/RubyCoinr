@@ -63,6 +63,7 @@ gem 'binding_of_caller'
 
 # bitcoin
 gem 'bitcoin-ruby', git: 'https://github.com/lian/bitcoin-ruby', branch: 'master', require: 'bitcoin'
+gem 'ffi'
 
 # QR codes
 gem 'rqrcode_to_svg'

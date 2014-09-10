@@ -7,8 +7,8 @@ class Btc
 
 	# convert private key to wallet import format for export
 	public
-	def self.convert_priv_key_to_wif addr
-		extended = '80' + addr
+	def self.convert_priv_key_to_wif privkey
+		extended = '80' + privkey
 		checksum = Bitcoin.sha256(Bitcoin.sha256(extended)).bytes[0..7].pack('c*').upcase
 		Bitcoin.encode_base58(extended + checksum)
 	end
@@ -16,7 +16,7 @@ class Btc
 	# convert wif back to standard private key format
 	def self.convert_wif_to_priv_key wif
 		# validate wif
-		raise Exception.new 'Invalid WIF' unless wif_is_valid?
+		raise Exception.new 'Invalid WIF' unless wif_is_valid? wif
 
 		# decode wif
 		base = Bitcoin.decode_base58(wif)
@@ -29,7 +29,9 @@ class Btc
 	end
 
 	# check wallet import formatted private key whether it’s valid or not
-	def self.wif_is_valid?
+	def self.wif_is_valid? wif = nil
+		return false unless wif
+
 		base = Bitcoin.decode_base58 wif
 		# this gets compared with the checksum
 		wif_rest = base.bytes[(base.length - 8)..base.length].pack('c*').upcase
@@ -78,4 +80,5 @@ class Btc
 
 		JSON.pretty_generate(json)
 	end
+
 end
