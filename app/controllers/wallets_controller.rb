@@ -142,6 +142,9 @@ class WalletsController < ApplicationController
     end
 
     unless @wallet.errors.any?
+      # relate wallet to current user
+      @wallet.user = current_user
+
       if @wallet.save
         redirect_to @wallet, notice: 'Wallet was successfully imported.'
       end
