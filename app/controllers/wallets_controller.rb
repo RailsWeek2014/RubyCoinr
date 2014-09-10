@@ -72,7 +72,10 @@ class WalletsController < ApplicationController
   def export
     set_wallet
     send_data(Btc.wallet_to_json(@wallet), type: 'text/json; charset=utf-8; header=present',
-      disposition: 'attachment; filename=wallet.json')
+      disposition: 'attachment; filename=wallet.aes.json')
+    # `wallet.aes.json` for blockchain compatibility, although the
+    # wallet format couldn’t be valid at the moment TODO
+  end
 
   # import wallet from json
   def import
