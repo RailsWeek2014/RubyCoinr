@@ -16,7 +16,7 @@ class Btc
 	# convert wif back to standard private key format
 	def self.convert_wif_to_priv_key wif
 		# validate wif
-		raise Exception.new 'Invalid WIF' unless wif_is_valid?
+		raise Exception.new 'Invalid WIF' unless wif_is_valid? wif
 
 		# decode wif
 		base = Bitcoin.decode_base58(wif)
