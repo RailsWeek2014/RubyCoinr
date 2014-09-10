@@ -1,6 +1,9 @@
 class TransactionsController < ApplicationController
   include TransactionsHelper
 
+  # only accessible to signed in users
+  before_filter :authenticate_user!
+
   before_action :set_transaction, only: [:show, :edit, :update, :destroy]
 
   # GET /transactions

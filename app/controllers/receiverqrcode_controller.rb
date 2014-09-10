@@ -3,7 +3,10 @@
 # see: http://stackoverflow.com/questions/16865821/rails-4-validate-model-without-a-database
 class ReceiverqrcodeController < ApplicationController
 	include ReceiverqrcodeHelper
-	
+
+	# only accessible to signed in users
+	before_filter :authenticate_user!
+
 	# create new empty Receiverqrcode
 	def new
 		@receiverqrcode = Receiverqrcode.new

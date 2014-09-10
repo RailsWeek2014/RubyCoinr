@@ -1,6 +1,9 @@
 require 'bitcoin'
 
 class WalletsController < ApplicationController
+  # only accessible to signed in users
+  before_filter :authenticate_user!
+
   before_action :set_wallet, only: [:show, :edit, :update, :destroy]
 
   # GET /wallets
