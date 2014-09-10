@@ -8,6 +8,7 @@ class Wallet < ActiveRecord::Base
 	after_create :generate_keypair
 
 	validates :label, presence: true
+	validates :user_id, presence:
 
 	# add new keypair (private key and public key) with
 	# address and update the pointer to it. the pointer
