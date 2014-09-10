@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   resources :wallets
   get 'wallets/:id/export' => 'wallets#export'
+  post 'wallets/new' => 'wallets#import'
 
   # post 'new_receiving_qrcode' => 'wallets#new_receiving_qrcode', as: 'gen_receiving_qrcode'
   get 'receiverqrcode/new' => 'receiverqrcode#new'

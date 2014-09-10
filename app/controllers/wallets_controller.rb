@@ -1,3 +1,5 @@
+require 'bitcoin'
+
 class WalletsController < ApplicationController
   before_action :set_wallet, only: [:show, :edit, :update, :destroy]
 
@@ -71,6 +73,77 @@ class WalletsController < ApplicationController
     set_wallet
     send_data(Btc.wallet_to_json(@wallet), type: 'text/json; charset=utf-8; header=present',
       disposition: 'attachment; filename=wallet.json')
+
+  # import wallet from json
+  def import
+    args = Hash.new
+    w = JSON.parse(params[:wallet].read())
+    keys = []
+
+    if w['label'] && w['label'].length > 0
+      args['label'] = w['label']
+    end
+
+    if w['keys'].any? && w['keys'].length > 0
+      w['keys'].each do |k|
+        key = Hash.new
+
+        # private key
+        unless Btc.wif_is_valid?(k['priv'])
+          raise Exception.new('Invalid private key detected.')
+        else
+          key['privkey'] = Btc.convert_wif_to_priv_key(k['priv'])
+        end
+
+        # gen public key form converted private key
+        key['pubkey'] = Bitcoin::Key.new(key['privkey']).pub
+
+        # validate and set address of keypair
+        addr = Bitcoin.pubkey_to_address(key['pubkey'])
+
+        unless (k['addr'] == addr) || Bitcoin.valid_address?(k['addr'])
+          raise Exception.new('Invalid address detected: ' + k['addr'])
+        else
+          key['address'] = k['addr']
+        end
+
+        # set whether keypair was used before or not
+        unless k['tag'] == 2
+          key['used'] = false
+        else
+          key['used'] = true
+        end
+
+        # gen qrcode from address
+        key['addr_qrcode_svg'] = RQRCode::QRCode.new('bitcoin:' + key['address'], :size => 10, :level => 'h').to_svg
+
+        keys << key
+      end
+    else
+      @wallet.errors.add(:base, 'Wallet has no key.')
+    end
+
+    # create wallet
+    @wallet = Wallet.new(args)
+
+    # save old keypairs
+    keys.each do |k|
+      # all clear, save keypairs
+      @wallet.keypairs << Keypair.new(k)
+    end
+
+    # quick check for existing wallet with label
+    # FIXME: not so generous existence checking
+    if Wallet.exists?(['label LIKE ?', "%#{ @wallet.label }%"])
+      @wallet.errors.add(:base, 'Wallet with label “%s” already exists' % [@wallet.label])
+    end
+
+    unless @wallet.errors.any?
+      if @wallet.save
+        redirect_to @wallet, notice: 'Wallet was successfully imported.'
+      end
+    end
+
   end
 
   private
@@ -83,4 +156,4 @@ class WalletsController < ApplicationController
     def wallet_params
       params.require(:wallet).permit(:label, :password)
     end
-end
+  end
