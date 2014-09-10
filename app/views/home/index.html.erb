@@ -2,18 +2,18 @@
 
 <% if notice %>
 <p id="notice" class="alert alert-success">
-	<%= notice %>
+    <%= notice %>
 </p>
 <% end %>
 
 <!-- Main jumbotron for a primary marketing message or call to action -->
 <div class="jumbotron">
     <% if user_signed_in? %>
-        <h2>Hello, fellow!</h2>
-        <p>Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Maecenas faucibus mollis interdum. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+    <h2>Hello, fellow!</h2>
+    <p>Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Maecenas faucibus mollis interdum. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
     <% else %>
-        <h2>Hello, stranger!</h2>
-        <%= render partial: 'shared/not_logged_in_warning_with_buttons' %>
+    <h2>Hello, stranger!</h2>
+    <%= render partial: 'shared/not_logged_in_warning_with_buttons' %>
     <% end %>
 </div>
 

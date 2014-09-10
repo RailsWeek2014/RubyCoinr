@@ -1,24 +1,24 @@
 <% if @wallet.errors.any? %><!-- errors -->
 <div class="alert alert-danger">
-	<h2>
-		Oh snap! <%= pluralize(@wallet.errors.count, "error") %> prohibited this wallet from being saved:
-	</h2>
+    <h2>
+        Oh snap! <%= pluralize(@wallet.errors.count, "error") %> prohibited this wallet from being saved:
+    </h2>
 
-	<ul>
-		<% @wallet.errors.full_messages.each do |message| %>
-		<li><%= message %></li>
-		<% end %>
-	</ul>
+    <ul>
+        <% @wallet.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+    </ul>
 </div>
 <% end %><!-- errors fin -->
 
 <!-- form -->
 <div class="well">
-	<%= bootstrap_form_for(@wallet) do |f| %>
+    <%= bootstrap_form_for(@wallet) do |f| %>
 
-	<%= f.text_field :label %>
-	<%= f.submit %>
+    <%= f.text_field :label %>
+    <%= f.submit %>
 
-	<% end %>
+    <% end %>
 </div>
 <!-- form fin -->

@@ -2,42 +2,42 @@
 <h2>Import wallet</h2>
 <% if @wallet.errors.any? %><!-- errors -->
 <div class="alert alert-danger">
-	<h2>
-		Can’t import wallet due to <%= pluralize(@wallet.errors.count, "error") %>:
-	</h2>
+    <h2>
+        Can’t import wallet due to <%= pluralize(@wallet.errors.count, "error") %>:
+    </h2>
 
-	<ul>
-		<% @wallet.errors.full_messages.each do |message| %>
-		<li><%= message %></li>
-		<% end %>
-	</ul>
+    <ul>
+        <% @wallet.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+    </ul>
 </div>
 
 <% else %><!-- only show form if no errors in previous request -->
 
 <div class="well">
-	<ul>
-		<li><strong>Label:</strong> <%= @wallet.label %></li>
-		<li>
-			<strong>Addresses:</strong>
+    <ul>
+        <li><strong>Label:</strong> <%= @wallet.label %></li>
+        <li>
+            <strong>Addresses:</strong>
 
-			<% if @wallet.keypairs.any? %>
-			<ul>
-				<% @wallet.keypairs.each do |k| %>
-				<li>
-					<span class="btc-addr"><%= k.address %></span>
-					<% if k.used %>
-					<small>(used)</small>
-					<% end %>
-				</li>
-				<% end %>
-			</ul>
+            <% if @wallet.keypairs.any? %>
+            <ul>
+                <% @wallet.keypairs.each do |k| %>
+                <li>
+                    <span class="btc-addr"><%= k.address %></span>
+                    <% if k.used %>
+                    <small>(used)</small>
+                    <% end %>
+                </li>
+                <% end %>
+            </ul>
 
-			<% else %>
-			None. This wallet is empty.
-			<% end %>
-		</li>
-	</ul>
+            <% else %>
+            None. This wallet is empty.
+            <% end %>
+        </li>
+    </ul>
 </div>
 <% end %><!-- errors fin -->
 

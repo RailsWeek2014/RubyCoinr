@@ -2,33 +2,33 @@
 
 <% if notice %>
 <p id="notice" class="alert alert-success">
-	<%= notice %>
+    <%= notice %>
 </p>
 <% end %>
 
 <div class="well">
-	<div class="row">
-		<div class="col-md-6">
-			<ul>
-				<li>
-					<strong>Label:</strong> <%= @wallet.label %>
-				</li>
-				<li>
-					<strong>Addresse:</strong> <span class="btc-addr"><%= @wallet.curr_key.address %></span>
-				</li>
-			</ul>
-		</div>
+    <div class="row">
+        <div class="col-md-6">
+            <ul>
+                <li>
+                    <strong>Label:</strong> <%= @wallet.label %>
+                </li>
+                <li>
+                    <strong>Addresse:</strong> <span class="btc-addr"><%= @wallet.curr_key.address %></span>
+                </li>
+            </ul>
+        </div>
 
-		<div class="col-md-6 centered">
-			<%= render inline: @wallet.curr_key.addr_qrcode_svg %>
-		</div>
-	</div>
+        <div class="col-md-6 centered">
+            <%= render inline: @wallet.curr_key.addr_qrcode_svg %>
+        </div>
+    </div>
 
-	<hr>
+    <hr>
 
-	<div class="centered row">
-		<%= link_to raw('<span class="glyphicon glyphicon-download-alt"></span> Export Wallet'), wallet_export_path(@wallet), :class => 'btn btn-warning btn-large' %>
-	</div>
+    <div class="centered row">
+        <%= link_to raw('<span class="glyphicon glyphicon-download-alt"></span> Export Wallet'), wallet_export_path(@wallet), :class => 'btn btn-warning btn-large' %>
+    </div>
 
 </div>
 

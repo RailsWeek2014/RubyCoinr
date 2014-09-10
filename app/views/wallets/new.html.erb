@@ -12,12 +12,12 @@
 <p>You could also upload previously exported wallets (or blockchain wallets) for import.</p>
 <!-- wallet import form -->
 <div class="well">
-	<%= bootstrap_form_tag({ action: :upload, multipart: true }) do |f| %>
+    <%= bootstrap_form_tag({ action: :upload, multipart: true }) do |f| %>
 
-	<%= f.file_field :wallet %>
-	<%= f.submit %>
+    <%= f.file_field :wallet %>
+    <%= f.submit %>
 
-	<% end %>
+    <% end %>
 </div>
 <hr>
 
