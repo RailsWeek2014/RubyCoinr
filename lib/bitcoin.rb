@@ -7,8 +7,8 @@ class Btc
 
 	# convert private key to wallet import format for export
 	public
-	def self.convert_priv_key_to_wif addr
-		extended = '80' + addr
+	def self.convert_priv_key_to_wif privkey
+		extended = '80' + privkey
 		checksum = Bitcoin.sha256(Bitcoin.sha256(extended)).bytes[0..7].pack('c*').upcase
 		Bitcoin.encode_base58(extended + checksum)
 	end
