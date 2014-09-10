@@ -21,7 +21,7 @@ class Transaction < ActiveRecord::Base
 	# validate fee
 	def fee_should_be_less_than_amount
 		if fee >= amount
-			errors.add(:fee, "has to be less than amount")
+			self.errors.add(:fee, "has to be less than amount")
 		end
 	end
 
