@@ -29,7 +29,9 @@ class Btc
 	end
 
 	# check wallet import formatted private key whether it’s valid or not
-	def self.wif_is_valid?
+	def self.wif_is_valid? wif = nil
+		return false unless wif
+
 		base = Bitcoin.decode_base58 wif
 		# this gets compared with the checksum
 		wif_rest = base.bytes[(base.length - 8)..base.length].pack('c*').upcase
