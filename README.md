@@ -2,7 +2,11 @@
 This project provides a local multiuser wallet managing webapp.
 
 ### Using
-This project needs at least Ruby version 2.1.2. After downloading and unpacking RubyCoinr, execute `bundle` to install the dependencies. Run RubyCoinr with `rails server`.
+This project needs at least Ruby version 2.1.2. After downloading and unpacking RubyCoinr, execute `bundle` to install the dependencies. 
+
+You need to register RubyCoinr as a twitter app to get api key and secret. Once you did, paste them in `config/secrets.yml`. **Note:** The app must be allowed to be used to *sign in with twitter* and the callback url should be set to `http://127.0.0.1:3000/auth/twitter/callback` if you’re in development mode. (I advise against running this project in production mode anyway.)  Call `rake secret` and paste the string as `secret_key_base`.
+
+Run RubyCoinr with `rails server`.
 
 ## Project specification (in german)
 (for details see [Roadmap.md](Roadmap.md))
