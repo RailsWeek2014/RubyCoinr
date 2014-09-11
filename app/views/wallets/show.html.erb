@@ -1,10 +1,6 @@
 <% content_for :page_title, 'Wallet: ' + @wallet.label %>
 
-<% if notice %>
-<p id="notice" class="alert alert-success">
-    <%= notice %>
-</p>
-<% end %>
+<%= render partial: 'shared/notice' %>
 
 <div class="well">
     <div class="row">
