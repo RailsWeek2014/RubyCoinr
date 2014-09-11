@@ -3,7 +3,6 @@ class Keypair < ActiveRecord::Base
 
     validates :privkey, presence: true
     validates :pubkey, presence: true
-    validates :wallet_id, presence: true
 
     after_create :set_defaults
 
