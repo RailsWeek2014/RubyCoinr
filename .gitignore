@@ -20,3 +20,6 @@
 
 # .DS_Store (osx)
 .DS_Store
+
+# secrets.yml
+secrets.yml
