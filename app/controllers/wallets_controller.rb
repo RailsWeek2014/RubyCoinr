@@ -32,7 +32,7 @@ class WalletsController < ApplicationController
         begin
             @wallet = Wallet.new(wallet_params)
             @wallet.user = current_user
-        rescue Exception
+        rescue => e
             @wallet.errors << 'Label too long'
         end
 
@@ -73,11 +73,12 @@ class WalletsController < ApplicationController
 
     # export wallet as json
     def export
+        # TODO: add list of txs to wallet
         set_wallet
         send_data(Btc.wallet_to_json(@wallet), type: 'text/json; charset=utf-8; header=present',
             disposition: 'attachment; filename=wallet.aes.json')
         # `wallet.aes.json` for blockchain compatibility, although the
-        # wallet format couldn’t be valid at the moment TODO
+        # wallet format may not be valid at the moment TODO?
     end
 
     # import wallet from json
@@ -85,6 +86,7 @@ class WalletsController < ApplicationController
         args = Hash.new
         w = JSON.parse(params[:wallet].read())
         keys = []
+        errs = []
 
         if w['label'] && w['label'].length > 0
             args['label'] = w['label']
@@ -96,9 +98,13 @@ class WalletsController < ApplicationController
 
                 # private key
                 unless Btc.wif_is_valid?(k['priv'])
-                    raise Exception.new('Invalid private key detected.')
+                    errs << 'Invalid private key detected.'
                 else
-                    key['privkey'] = Btc.convert_wif_to_priv_key(k['priv'])
+                    begin
+                        key['privkey'] = Btc.convert_wif_to_priv_key(k['priv'])
+                    rescue => e
+                        errs << e.message
+                    end
                 end
 
                 # gen public key form converted private key
@@ -108,7 +114,7 @@ class WalletsController < ApplicationController
                 addr = Bitcoin.pubkey_to_address(key['pubkey'])
 
                 unless (k['addr'] == addr) || Bitcoin.valid_address?(k['addr'])
-                    raise Exception.new('Invalid address detected: ' + k['addr'])
+                    errs << ('Invalid address detected: ' + k['addr'])
                 else
                     key['address'] = k['addr']
                 end
@@ -121,16 +127,22 @@ class WalletsController < ApplicationController
                 end
 
                 # gen qrcode from address
-                key['addr_qrcode_svg'] = RQRCode::QRCode.new('bitcoin:' + key['address'], :size => 10, :level => 'h').to_svg
+                key['addr_qrcode_svg'] = RQRCode::QRCode.new('bitcoin:' + key['address'],
+                    :size => 10, :level => 'h').to_svg
 
                 keys << key
             end
         else
-            @wallet.errors.add(:base, 'Wallet has no key.')
+            errs << 'Wallet has no key.'
         end
 
         # create wallet
         @wallet = Wallet.new(args)
+
+        # add previous errors
+        errs.each do |err|
+            @wallet.errors.add(:base, err)
+        end
 
         # save old keypairs
         keys.each do |k|
@@ -139,7 +151,7 @@ class WalletsController < ApplicationController
         end
 
         # quick check for existing wallet with label
-        # FIXME: not so generous existence checking
+        # FIXME: improve check if wallet exists
         if Wallet.exists?(['label LIKE ?', "%#{ @wallet.label }%"])
             @wallet.errors.add(:base, 'Wallet with label “%s” already exists' % [@wallet.label])
         end
@@ -152,6 +164,7 @@ class WalletsController < ApplicationController
                 redirect_to @wallet, notice: 'Wallet was successfully imported.'
             end
         end
+
     end
 
     private
