@@ -1,13 +1,14 @@
 class Wallet < ActiveRecord::Base
 	belongs_to :user
-	has_many :transactions
-	has_many :keypairs
+	has_many :transactions, :dependent => :destroy
+	has_many :keypairs, :dependent => :destroy
 	belongs_to :curr_key, class_name: 'Keypair', foreign_key: 'keypair_ptr_id'
 
 	# create initial keypair
 	after_create :generate_keypair
 
 	validates :label, presence: true
+	validates :user_id, presence:
 
 	# add new keypair (private key and public key) with
 	# address and update the pointer to it. the pointer

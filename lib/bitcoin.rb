@@ -3,82 +3,97 @@ require 'json'
 
 class Btc
 
-	# == BITCOIN WALLET IMPORT FORMAT ==
+    # == BITCOIN WALLET IMPORT FORMAT ==
 
-	# convert private key to wallet import format for export
-	public
-	def self.convert_priv_key_to_wif privkey
-		extended = '80' + privkey
-		checksum = Bitcoin.sha256(Bitcoin.sha256(extended)).bytes[0..7].pack('c*').upcase
-		Bitcoin.encode_base58(extended + checksum)
-	end
+    # convert private key to wallet import format for export
+    public
+    def self.convert_priv_key_to_wif privkey
+        if Bitcoin.network_name == :bitcoin
+            # mainnet
+            extended = '80' + privkey
+        else
+            # testnet
+            extended = 'EF' + privkey
+        end
 
-	# convert wif back to standard private key format
-	def self.convert_wif_to_priv_key wif
-		# validate wif
-		raise Exception.new 'Invalid WIF' unless wif_is_valid? wif
+        checksum = Bitcoin.sha256(Bitcoin.sha256(extended)).bytes[0..7].pack('c*').upcase
+        Bitcoin.encode_base58(extended + checksum)
+    end
 
-		# decode wif
-		base = Bitcoin.decode_base58(wif)
+    # convert wif back to standard private key format
+    def self.convert_wif_to_priv_key wif
+        # validate wif
+        raise Exception.new 'Invalid WIF' unless wif_is_valid? wif
 
-		# drop checksum
-		shortened = base.bytes[0..(base.length-9)].pack('c*').upcase
+        # decode wif
+        base = Bitcoin.decode_base58(wif)
 
-		# cut off 0x80 and return
-		shortened.bytes[2..shortened.length].pack('c*').upcase
-	end
+        # drop checksum
+        shortened = base.bytes[0..(base.length-9)].pack('c*').upcase
 
-	# check wallet import formatted private key whether it’s valid or not
-	def self.wif_is_valid? wif = nil
-		return false unless wif
+        # cut off 0x80/0xef and return
+        network_prefix = shortened.bytes[0..1].pack('c*').upcase
 
-		base = Bitcoin.decode_base58 wif
-		# this gets compared with the checksum
-		wif_rest = base.bytes[(base.length - 8)..base.length].pack('c*').upcase
+        if (network_prefix == '80' && Bitcoin.network_name == :testnet3)
+            raise Excepton 'Mainnet address can’t be used in testnet'
+        elsif (network_prefix == 'ef' && Bitcoin.network_name == :bitcoin)
+            raise Excepton 'Testnet address can’t be used in mainnet'
+        end
+        
+        shortened.bytes[2..shortened.length].pack('c*').upcase
+    end
 
-		# calculate checksum
-		shortened = base.bytes[0..(base.length-9)].pack('c*').upcase
-		checksum = Bitcoin.sha256(Bitcoin.sha256(shortened)).bytes[0..7].pack('c*').upcase
+    # check wallet import formatted private key whether it’s valid or not
+    def self.wif_is_valid? wif = nil
+        return false unless wif
 
-		if checksum == wif_rest
-			true
-		else
-			false
-		end
-	end
+        base = Bitcoin.decode_base58 wif
+        # this gets compared with the checksum
+        wif_rest = base.bytes[(base.length - 8)..base.length].pack('c*').upcase
 
-	# export/import of wallet
-	# format: https://blockchain.info/wallet/wallet-format
+        # calculate checksum
+        shortened = base.bytes[0..(base.length-9)].pack('c*').upcase
+        checksum = Bitcoin.sha256(Bitcoin.sha256(shortened)).bytes[0..7].pack('c*').upcase
 
-	# convert wallet to 
-	def self.wallet_to_json wallet
-		json = Hash.new
+        if checksum == wif_rest
+            true
+        else
+            false
+        end
+    end
 
-		# set wallet label if exists
-		if wallet.label && wallet.label.length > 0
-			json['label'] = wallet.label
-		end
+    # export/import of wallet
+    # format: https://blockchain.info/wallet/wallet-format
 
-		# convert keys
-		if wallet.keypairs.any?
-			json['keys'] = []
+    # convert wallet to 
+    def self.wallet_to_json wallet
+        json = Hash.new
 
-			wallet.keypairs.each do |keypair|
-				key = Hash.new
+        # set wallet label if exists
+        if wallet.label && wallet.label.length > 0
+            json['label'] = wallet.label
+        end
 
-				# 
-				if keypair.used
-					key['tag']  = 2
-				end
+        # convert keys
+        if wallet.keypairs.any?
+            json['keys'] = []
 
-				key['addr'] = keypair.address
-				key['priv'] = convert_priv_key_to_wif keypair.privkey
+            wallet.keypairs.each do |keypair|
+                key = Hash.new
 
-				json['keys'] << key
-			end
-		end
+                # 
+                if keypair.used
+                    key['tag']  = 2
+                end
 
-		JSON.pretty_generate(json)
-	end
+                key['addr'] = keypair.address
+                key['priv'] = convert_priv_key_to_wif keypair.privkey
+
+                json['keys'] << key
+            end
+        end
+
+        JSON.pretty_generate(json)
+    end
 
 end

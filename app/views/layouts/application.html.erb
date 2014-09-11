@@ -10,28 +10,28 @@
 <body>
 
     <header id="header" class="">
-    <!-- Fixed navbar -->
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="/" title="RubyCoinr"><%= image_tag 'logo.svg', :class => 'logo' %></a>
-            </div>
-
-            <div class="navbar-collapse collapse">
-                <div class="nav navbar-nav navbar-right">
-                    <ul>
-                    <% if user_signed_in? %>
-                        <li><%= link_to 'Edit account', edit_user_registration_path, :class => "btn btn-default btn-sm" %></li>
-                        <li><%= link_to "Sign Out", destroy_user_session_path, :method => :delete, :class => 'btn btn-warning btn-sm' %></li>
-                    <% else %>
-                        <li><%= link_to "Sign In", new_user_session_path, :class => "btn btn-default btn-sm" %></li>
-                        <li><%= link_to "Sign Up", new_user_registration_path, :class => "btn btn-success btn-sm" %></li>
-                    <% end %>
-                    </ul>
+        <!-- Fixed navbar -->
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/" title="RubyCoinr"><%= image_tag 'logo.svg', :class => 'logo' %></a>
                 </div>
-            </div><!--/.nav-collapse -->
+
+                <div class="navbar-collapse collapse">
+                    <div class="nav navbar-nav navbar-right">
+                        <ul>
+                            <% if user_signed_in? %>
+                            <li><%= link_to 'Edit account', edit_user_registration_path, :class => "btn btn-default btn-sm" %></li>
+                            <li><%= link_to "Sign Out", destroy_user_session_path, :method => :delete, :class => 'btn btn-warning btn-sm' %></li>
+                            <% else %>
+                            <li><%= link_to "Sign In", new_user_session_path, :class => "btn btn-default btn-sm" %></li>
+                            <li><%= link_to "Sign Up", new_user_registration_path, :class => "btn btn-success btn-sm" %></li>
+                            <% end %>
+                        </ul>
+                    </div>
+                </div><!--/.nav-collapse -->
+            </div>
         </div>
-    </div>
     </header><!-- /header -->
 
     <div class="container">
@@ -41,7 +41,7 @@
             </div>
             
             <%= render 'sidebar' %>
-    </div>
+        </div>
     <!-- Javascripts
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->

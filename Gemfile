@@ -41,8 +41,6 @@ gem 'spring',        group: :development
 # Custom gem dependencies
 # Login
 gem 'devise'
-gem 'omniauth'
-gem 'omniauth-twitter'
 
 # twitter bootstrap css & javascript toolkit
 gem 'twitter-bootswatch-rails', '~> 3.2.0'

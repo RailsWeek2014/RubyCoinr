@@ -6,16 +6,16 @@
 ### 0.2.0 (Tag 3)
 - mehrere nutzer mit mehreren wallets
 - wallets
-	- neu anlegen
-	- importieren
-	- exportieren
+    - neu anlegen
+    - importieren
+    - exportieren
 - wallets und nutzeraccount administrieren
 
 ### 0.3.0 (Tag 5)
 - transaktionen
-	- transaktionen veranlassen
-	- historie von transaktionen ansehen
-	- status der transaktionen ansehen
+    - transaktionen veranlassen
+    - historie von transaktionen ansehen
+    - status der transaktionen ansehen
 - kontostand
 - wert in € in verschiedenen marketplaces
 

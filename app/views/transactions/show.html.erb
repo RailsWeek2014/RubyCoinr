@@ -6,17 +6,17 @@
 
 <% if notice %>
 <p id="notice" class="alert alert-success">
-	<%= notice %>
+    <%= notice %>
 </p>
 <% end %>
 
 <% if @transaction.confirmed %>
 <div class="alert alert-succsess">
-	This transaction is confirmed by the bitcoin network.
+    This transaction is confirmed by the bitcoin network.
 </div>
 <% else %>
 <div class="alert alert-info">
-	This transaction is not confirmed yet.
+    This transaction is not confirmed yet.
 </div>
 <% end %>
 
@@ -25,35 +25,35 @@
 <% end %>
 
 <div class="well">
-	<div class="row">
-		<div class="col-lg-3">
-			<strong>Receiver address:</strong>
-		</div>
+    <div class="row">
+        <div class="col-lg-3">
+            <strong>Receiver address:</strong>
+        </div>
 
-		<div class="col-lg-9">
-			<span class="btc-addr"><%= @transaction.receiver_addr %></span>
-		</div>
-	</div>
+        <div class="col-lg-9">
+            <span class="btc-addr"><%= @transaction.receiver_addr %></span>
+        </div>
+    </div>
 
-	<div class="row">
-		<div class="col-lg-3">
-			<strong>Amount:</strong>
-		</div>
+    <div class="row">
+        <div class="col-lg-3">
+            <strong>Amount:</strong>
+        </div>
 
-		<div class="col-lg-9">
-			<%= @transaction.amount %>
-		</div>
-	</div>
+        <div class="col-lg-9">
+            <%= @transaction.amount %>
+        </div>
+    </div>
 
-	<div class="row">
-		<div class="col-lg-3">
-			<strong>Fee:</strong>
-		</div>
+    <div class="row">
+        <div class="col-lg-3">
+            <strong>Fee:</strong>
+        </div>
 
-		<div class="col-lg-9">
-			<%= @transaction.fee %>
-		</div>
-	</p>
+        <div class="col-lg-9">
+            <%= @transaction.fee %>
+        </div>
+    </p>
 </div>
 </div>
 
