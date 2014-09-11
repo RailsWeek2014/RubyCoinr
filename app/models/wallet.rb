@@ -1,7 +1,7 @@
 class Wallet < ActiveRecord::Base
 	belongs_to :user
-	has_many :transactions
-	has_many :keypairs
+	has_many :transactions, :dependent => :destroy
+	has_many :keypairs, :dependent => :destroy
 	belongs_to :curr_key, class_name: 'Keypair', foreign_key: 'keypair_ptr_id'
 
 	# create initial keypair
