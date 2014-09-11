@@ -8,7 +8,14 @@ class Btc
     # convert private key to wallet import format for export
     public
     def self.convert_priv_key_to_wif privkey
-        extended = '80' + privkey
+        if Bitcoin.network_name == :bitcoin
+            # mainnet
+            extended = '80' + privkey
+        else
+            # testnet
+            extended = 'EF' + privkey
+        end
+
         checksum = Bitcoin.sha256(Bitcoin.sha256(extended)).bytes[0..7].pack('c*').upcase
         Bitcoin.encode_base58(extended + checksum)
     end
@@ -24,7 +31,15 @@ class Btc
         # drop checksum
         shortened = base.bytes[0..(base.length-9)].pack('c*').upcase
 
-        # cut off 0x80 and return
+        # cut off 0x80/0xef and return
+        network_prefix = shortened.bytes[0..1].pack('c*').upcase
+
+        if (network_prefix == '80' && Bitcoin.network_name == :testnet3)
+            raise Excepton 'Mainnet address can’t be used in testnet'
+        elsif (network_prefix == 'ef' && Bitcoin.network_name == :bitcoin)
+            raise Excepton 'Testnet address can’t be used in mainnet'
+        end
+        
         shortened.bytes[2..shortened.length].pack('c*').upcase
     end
 
