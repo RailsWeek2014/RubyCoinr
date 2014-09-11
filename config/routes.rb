@@ -14,7 +14,11 @@ Rails.application.routes.draw do
   patch 'receiverqrcode' => 'home#index'
   delete 'receiverqrcode' => 'home#index'
 
-  devise_for :users
+  # redirect 'edit transaction'
+  get 'transactions/:id/edit' => 'transactions#redirect'
+  patch 'transactions/:id' => 'transactions#redirect'
+
+  devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks" }
   root :to => "home#index"
 
   # The priority is based upon order of creation: first created -> highest priority.

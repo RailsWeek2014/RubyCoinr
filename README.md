@@ -12,7 +12,7 @@ This project needs at least Ruby version 2.1.2. After downloading and unpacking 
 - multiuser mit externem login
 - mehrere wallets (exportieren, importieren, neu anlegen)
 - transaktionen (status, veranlassen, historie angucken)
-- kontostand
+- kontostand (geht nicht aufgrund von fehlern mit storage von `bitcoin-ruby`)
 
 ### Optional
 - kontakte (eingegangene/ausgegangene transaktionen benennen, nicht schon vorher)

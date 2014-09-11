@@ -24,8 +24,7 @@
                             <li><%= link_to 'Edit account', edit_user_registration_path, :class => "btn btn-default btn-sm" %></li>
                             <li><%= link_to "Sign Out", destroy_user_session_path, :method => :delete, :class => 'btn btn-warning btn-sm' %></li>
                             <% else %>
-                            <li><%= link_to "Sign In", new_user_session_path, :class => "btn btn-default btn-sm" %></li>
-                            <li><%= link_to "Sign Up", new_user_registration_path, :class => "btn btn-success btn-sm" %></li>
+                            <%= render partial: 'shared/login_signup_buttons' %>
                             <% end %>
                         </ul>
                     </div>

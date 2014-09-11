@@ -1,10 +1,6 @@
 <% content_for :page_title, 'Welcome!' %>
 
-<% if notice %>
-<p id="notice" class="alert alert-success">
-    <%= notice %>
-</p>
-<% end %>
+<%= render partial: 'shared/notice' %>
 
 <!-- Main jumbotron for a primary marketing message or call to action -->
 <div class="jumbotron">

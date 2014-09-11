@@ -65,3 +65,7 @@ gem 'ffi'
 
 # QR codes
 gem 'rqrcode_to_svg'
+
+# omniauth
+gem 'omniauth'
+gem 'omniauth-twitter'

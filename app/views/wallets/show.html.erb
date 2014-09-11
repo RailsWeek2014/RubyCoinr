@@ -1,10 +1,6 @@
 <% content_for :page_title, 'Wallet: ' + @wallet.label %>
 
-<% if notice %>
-<p id="notice" class="alert alert-success">
-    <%= notice %>
-</p>
-<% end %>
+<%= render partial: 'shared/notice' %>
 
 <div class="well">
     <div class="row">
@@ -14,7 +10,7 @@
                     <strong>Label:</strong> <%= @wallet.label %>
                 </li>
                 <li>
-                    <strong>Addresse:</strong> <span class="btc-addr"><%= @wallet.curr_key.address %></span>
+                    <strong>Address:</strong> <span class="btc-addr"><%= @wallet.curr_key.address %></span>
                 </li>
             </ul>
         </div>

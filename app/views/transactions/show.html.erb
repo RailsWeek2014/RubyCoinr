@@ -4,11 +4,7 @@
 <% content_for :page_title, 'Transacton to ' + @transaction.receiver_addr %>
 <% end %>
 
-<% if notice %>
-<p id="notice" class="alert alert-success">
-    <%= notice %>
-</p>
-<% end %>
+<%= render partial: 'shared/notice' %>
 
 <% if @transaction.confirmed %>
 <div class="alert alert-succsess">
