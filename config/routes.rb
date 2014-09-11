@@ -14,6 +14,10 @@ Rails.application.routes.draw do
   patch 'receiverqrcode' => 'home#index'
   delete 'receiverqrcode' => 'home#index'
 
+  # redirect 'edit transaction'
+  get 'transactions/:id/edit' => 'transactions#redirect'
+  patch 'transactions/:id' => 'transactions#redirect'
+
   devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks" }
   root :to => "home#index"
 
